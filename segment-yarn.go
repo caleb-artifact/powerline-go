@@ -20,7 +20,7 @@ func segmentYarn(p *powerline) []pwl.Segment {
 
 	return []pwl.Segment{{
 		Name:       "yarn-version",
-		Content:    "yarn " + version,
+		Content:    "\U000130E0 " + version,
 		Foreground: p.theme.YarnFg,
 		Background: p.theme.YarnBg,
 	}}

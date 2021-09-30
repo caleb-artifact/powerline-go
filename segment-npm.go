@@ -20,7 +20,7 @@ func segmentNPM(p *powerline) []pwl.Segment {
 
 	return []pwl.Segment{{
 		Name:       "npm-version",
-		Content:    "npm " + npmVersion,
+		Content:    "\u2B21 " + npmVersion,
 		Foreground: p.theme.NPMFg,
 		Background: p.theme.NPMBg,
 	}}

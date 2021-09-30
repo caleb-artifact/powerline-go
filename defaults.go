@@ -965,6 +965,10 @@ var defaults = Config{
 			NodeBg:             40,
 			NodeVersionFg:      40,
 			NodeVersionBg:      15,
+			NPMFg:              15,
+			NPMBg:              1,
+			YarnFg:             15,
+			YarnBg:             24,
 			LoadFg:             15,
 			LoadBg:             2,
 			LoadHighBg:         5,
@@ -1299,6 +1303,10 @@ var defaults = Config{
 			NodeBg:             40,
 			NodeVersionFg:      40,
 			NodeVersionBg:      15,
+			NPMFg:              15,
+			NPMBg:              1,
+			YarnFg:             15,
+			YarnBg:             24,
 			LoadFg:             15,
 			LoadBg:             2,
 			LoadHighBg:         5,
@@ -1632,6 +1640,10 @@ var defaults = Config{
 			NodeBg:             gruvbox_faded_green,  // match virtualenv
 			NodeVersionFg:      gruvbox_faded_green,  // match virtualenv
 			NodeVersionBg:      gruvbox_light0,       // match virtualenv
+			NPMFg:              gruvbox_light2,
+			NPMBg:              gruvbox_faded_red,
+			YarnFg:             gruvbox_light2,
+			YarnBg:             gruvbox_faded_blue,
 			LoadFg:             gruvbox_light0,
 			LoadBg:             gruvbox_faded_purple,
 			LoadHighBg:         gruvbox_neutral_red,
