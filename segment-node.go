@@ -13,6 +13,7 @@ import (
 const pkgfile = "./package.json"
 
 type packageJSON struct {
+	Name    string `json:"name"`
 	Version string `json:"version"`
 }
 
@@ -32,7 +33,7 @@ func getPackageVersion() string {
 	if stat.IsDir() {
 		return ""
 	}
-	pkg := packageJSON{"!"}
+	pkg := packageJSON{}
 	raw, err := ioutil.ReadFile(pkgfile)
 	if err != nil {
 		return ""
@@ -42,7 +43,16 @@ func getPackageVersion() string {
 		return ""
 	}
 
-	return strings.TrimSpace(pkg.Version)
+	version := strings.TrimSpace(pkg.Version)
+	name := strings.TrimSpace(pkg.Name)
+
+	if version == "" && name == "" {
+		return "!"
+	} else if version == "" || name == "" {
+		return name + version
+	} else {
+		return name + "@" + version
+	}
 }
 
 func segmentNode(p *powerline) []pwl.Segment {
