@@ -260,6 +260,12 @@ var defaults = Config{
 			NodeVersionFg: 40,
 			NodeVersionBg: 15,
 
+			NPMFg: 15,
+			NPMBg: 1,
+
+			YarnFg: 15,
+			YarnBg: 24,
+
 			LoadFg:           15,
 			LoadBg:           22,
 			LoadHighBg:       161,

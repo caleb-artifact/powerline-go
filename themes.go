@@ -140,6 +140,12 @@ type Theme struct {
 	NodeVersionFg uint8
 	NodeVersionBg uint8
 
+	NPMFg uint8
+	NPMBg uint8
+
+	YarnFg uint8
+	YarnBg uint8
+
 	LoadFg           uint8
 	LoadBg           uint8
 	LoadHighBg       uint8

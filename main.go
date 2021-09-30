@@ -102,10 +102,13 @@ var modules = map[string]func(*powerline) []pwl.Segment{
 	"terraform-workspace": segmentTerraformWorkspace,
 	"time":                segmentTime,
 	"node":                segmentNode,
+	"node-version":        segmentNodeVersion,
+	"npm":                 segmentNPM,
 	"user":                segmentUser,
 	"venv":                segmentVirtualEnv,
 	"vgo":                 segmentVirtualGo,
 	"wsl":                 segmentWSL,
+	"yarn":                segmentYarn,
 	"nix-shell":           segmentNixShell,
 }
 
