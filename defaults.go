@@ -1635,6 +1635,7 @@ var defaults = Config{
 			NixShellBg:         gruvbox_faded_purple,
 		},
 	},
+	RecursivePackageSearch: false,
 }
 
 const (

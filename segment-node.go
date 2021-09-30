@@ -10,7 +10,7 @@ import (
 	pwl "github.com/justjanne/powerline-go/powerline"
 )
 
-const pkgfile = "./package.json"
+const pkgfile = "package.json"
 
 type packageJSON struct {
 	Name    string `json:"name"`
@@ -25,16 +25,47 @@ func getNodeVersion() string {
 	return strings.TrimSuffix(string(out), "\n")
 }
 
-func getPackageVersion() string {
-	stat, err := os.Stat(pkgfile)
-	if err != nil {
-		return ""
+func findPackageJSON(deepSearch bool) (path string, ok bool) {
+	pkgPath := "./" + pkgfile
+	stat, err := os.Stat(pkgPath)
+	if err == nil && !stat.IsDir() {
+		return pkgPath, true
+	} else if !deepSearch || (!os.IsNotExist(err) && !os.IsPermission(err)) {
+		return "", false
 	}
-	if stat.IsDir() {
+
+	prevDir, err := os.Stat(".")
+	if err != nil {
+		return "", false
+	}
+	for parent := ".."; ; parent = "../" + parent {
+		if len(parent) > 1024 {
+			return "", false
+		}
+		stat, err = os.Stat(parent)
+		if err != nil {
+			return "", false
+		} else if os.SameFile(stat, prevDir) {
+			return "", false
+		}
+		prevDir = stat
+
+		stat, err = os.Stat(parent + "/" + pkgfile)
+		if err == nil && !stat.IsDir() {
+			return parent + "/" + pkgfile, true
+		} else if err != nil && !os.IsNotExist(err) && !os.IsPermission(err) {
+			return "", false
+		}
+	}
+}
+
+func getPackageVersionString(p *powerline) string {
+	pkgPath, ok := findPackageJSON(p.cfg.NodeDeepPackageSearch)
+	if !ok {
 		return ""
 	}
 	pkg := packageJSON{}
-	raw, err := ioutil.ReadFile(pkgfile)
+	raw, err := ioutil.ReadFile(pkgPath)
 	if err != nil {
 		return ""
 	}
@@ -57,7 +88,7 @@ func getPackageVersion() string {
 
 func segmentNode(p *powerline) []pwl.Segment {
 	nodeVersion := getNodeVersion()
-	packageVersion := getPackageVersion()
+	pkgVersion := getPackageVersionString(p)
 
 	segments := []pwl.Segment{}
 
@@ -70,10 +101,10 @@ func segmentNode(p *powerline) []pwl.Segment {
 		})
 	}
 
-	if packageVersion != "" {
+	if pkgVersion != "" {
 		segments = append(segments, pwl.Segment{
 			Name:       "node-segment",
-			Content:    packageVersion + " \u2B22",
+			Content:    pkgVersion + " \u2B22",
 			Foreground: p.theme.NodeFg,
 			Background: p.theme.NodeBg,
 		})
