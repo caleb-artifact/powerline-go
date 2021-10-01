@@ -1654,6 +1654,7 @@ var defaults = Config{
 		},
 	},
 	RecursivePackageSearch: false,
+	EnableEngines:          true,
 }
 
 const (

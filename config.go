@@ -54,6 +54,8 @@ type Config struct {
 	Shells                 ShellMap  `json:"shells"`
 	Themes                 ThemeMap  `json:"themes"`
 	RecursivePackageSearch bool      `json:"recursive-package-search"`
+	EnableEngines          bool      `json:"enable-engines"`
+	ShowEngines            []string  `json:"show-engines"`
 }
 
 func (mode *SymbolTemplate) UnmarshalJSON(data []byte) error {

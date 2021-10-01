@@ -79,9 +79,22 @@ func getPackageVersionString(p *powerline) string {
 	name := strings.TrimSpace(pkg.Name)
 	engines := ""
 
-	if pkg.Engines != nil && len(pkg.Engines) > 0 {
+	if p.cfg.EnableEngines && pkg.Engines != nil && len(pkg.Engines) > 0 {
 
 		for engine, val := range pkg.Engines {
+			if len(p.cfg.ShowEngines) > 0 {
+				found := false
+				for _, showEngine := range p.cfg.ShowEngines {
+					if showEngine == engine {
+						found = true
+						break
+					}
+				}
+				if !found {
+					continue
+				}
+			}
+
 			switch version := val.(type) {
 			case string:
 				if len(engines) > 0 {
@@ -91,7 +104,9 @@ func getPackageVersionString(p *powerline) string {
 			}
 		}
 
-		engines = " (" + engines + ")"
+		if len(engines) > 0 {
+			engines = " (" + engines + ")"
+		}
 	}
 
 	str := ""
