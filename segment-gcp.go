@@ -125,6 +125,13 @@ func segmentGCP(p *powerline) []pwl.Segment {
 	if project == "" {
 		return []pwl.Segment{}
 	}
+
+	if p.cfg.GCPProjectAliases != nil {
+		if alias, ok := p.cfg.GCPProjectAliases[project]; ok {
+			project = alias
+		}
+	}
+
 	return []pwl.Segment{{
 		Name:       "gcp",
 		Content:    project,

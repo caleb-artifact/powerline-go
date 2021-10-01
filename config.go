@@ -56,6 +56,7 @@ type Config struct {
 	RecursivePackageSearch bool      `json:"recursive-package-search"`
 	EnableEngines          bool      `json:"enable-engines"`
 	ShowEngines            []string  `json:"show-engines"`
+	GCPProjectAliases      AliasMap  `json:"gcp-project-aliases"`
 }
 
 func (mode *SymbolTemplate) UnmarshalJSON(data []byte) error {
