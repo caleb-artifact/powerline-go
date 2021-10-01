@@ -132,6 +132,10 @@ func segmentGCP(p *powerline) []pwl.Segment {
 		}
 	}
 
+	if p.cfg.GCPIcon != "" {
+		project = p.cfg.GCPIcon + " " + project
+	}
+
 	return []pwl.Segment{{
 		Name:       "gcp",
 		Content:    project,

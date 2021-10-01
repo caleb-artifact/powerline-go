@@ -57,6 +57,7 @@ type Config struct {
 	EnableEngines          bool      `json:"enable-engines"`
 	ShowEngines            []string  `json:"show-engines"`
 	GCPProjectAliases      AliasMap  `json:"gcp-project-aliases"`
+	GCPIcon                string    `json:"gcp-icon"`
 }
 
 func (mode *SymbolTemplate) UnmarshalJSON(data []byte) error {
